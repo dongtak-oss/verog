@@ -65,12 +65,23 @@ fetch("data/review.json")
 
   if (reviews.length > 0) {
     document.getElementById("review-list").innerHTML = reviews.map(r => `
-      <li class="review">
-        <strong>총점: ${r.총점.toFixed(1)} ⭐</strong><br/>
-        맛: ${r["맛"]} | 가성비: ${r["가성비"]} | 친절·위생: ${r["친절위생"]} | 분위기: ${r["분위기"]} | 취향: ${r["개인취향"]}<br/>
-        <em>“${r["한줄평"]}”</em>
-      </li>
-    `).join('');
+  <li class="review-card">
+    <div class="review-header">
+      <span>${r.작성자 || "익명"}</span>
+      <span>${r.작성일 || "날짜 없음"}</span>
+    </div>
+    <div class="review-stars">
+      맛: ${r["맛"]} | 가성비: ${r["가성비"]} | 분위기: ${r["분위기"]} | 친절·위생: ${r["친절위생"]} | 취향: ${r["개인취향"]}
+    </div>
+    <div class="review-comment">
+      “${r["한줄평"]}”
+    </div>
+    <div class="review-footer">
+      총점: <strong>${r["총점"]?.toFixed(1) ?? "?"} ⭐</strong>
+    </div>
+  </li>
+`).join('');
+
   } else {
     document.getElementById("review-list").innerHTML = "<li>아직 리뷰가 없습니다.</li>";
   }

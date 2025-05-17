@@ -57,17 +57,24 @@
       <span class="content" id="full-type">이탈리안</span>
     </div>
 
-    <!-- 리뷰 목록 -->
-    <button id="toggle-reviews" class="info-button">리뷰 보기 ⬇</button>
-    <div id="review-section" class="hidden">
-      <h4>리뷰</h4>
-      <ul id="review-list"></ul>
-      <a id="review-button" class="write-review-btn" href="#" target="_blank">
-        ➕ 리뷰 작성하기
-      </a>
-      <a id="view-detailed-review" class="write-review-btn" href="#">📖 상세 리뷰 보기</a>
-    </div>
+    <!-- ✅ 리뷰 목록 (항상 보이는 형태) -->
+<div id="review-section">
+  <h4>리뷰</h4>
+  <ul id="review-list" class="review-list">
+    <!-- JS로 여기에 리뷰 카드들이 삽입됨 -->
+  </ul>
+
+  <!-- ✅ 버튼들을 아래 정렬 -->
+  <div class="review-actions">
+    <a id="review-button" class="write-review-btn" href="#" target="_blank">
+      ➕ 리뷰 작성하기
+    </a>
+    <a id="view-detailed-review" class="write-review-btn" href="#">
+      📖 상세 리뷰 보기
+    </a>
   </div>
+</div>
+
 </div>
 
 

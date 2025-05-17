@@ -156,6 +156,77 @@ html, body {
   font-size: 14px;
 }
 
+/* ✅ 전체 리뷰 섹션 제목 */
+#review-section h4 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 24px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 6px;
+}
+
+/* ✅ 리뷰 카드 목록 */
+.review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+/* ✅ 각각의 리뷰 카드 */
+.review-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 14px 16px;
+  background: #fefefe;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* ✅ 리뷰 카드 내부 요소 */
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 4px;
+  color: #555;
+}
+
+.review-stars {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+.review-comment {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* ✅ 리뷰 액션 버튼들 */
+.review-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.write-review-btn {
+  background: #f1f1f1;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  text-decoration: none;
+  color: #333;
+  border: 1px solid #ccc;
+  transition: all 0.2s ease;
+}
+
+.write-review-btn:hover {
+  background: #eaeaea;
+}
+
+
 /* ✅ 이미지 캐러셀 */
 .carousel-container {
   position: relative;
