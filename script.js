@@ -99,6 +99,15 @@ fetch("data/review.json")
     });
   }
 
+  // ✅ 상세 리뷰 버튼 (info-full-card 안)
+document.getElementById("view-detailed-review").addEventListener("click", () => {
+  const location = JSON.parse(document.getElementById("info-full-card").dataset.locationData);
+  if (location && location.id) {
+    window.location.href = `full_reviews/${location.id}.html`;
+  }
+});
+
+
   const backButton = document.getElementById("back-to-preview");
   if (backButton) {
     backButton.addEventListener("click", () => {

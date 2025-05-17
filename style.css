@@ -5,21 +5,26 @@
   box-sizing: border-box;
 }
 
-body, html {
-  height: 100vh;
-  font-family: 'Noto Sans KR', sans-serif;
-  background-color: #fff;
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;       /* ✅ 이거 추가 */
+  height: 100%;       /* ✅ 100vh → 100%로 변경 */
   overflow: hidden;
-  position: relative;
+  position: relative; /* ✅ 이 줄도 추가 (렌더링 안정성 확보) */
 }
 
-/* ✅ 지도 */
+
+
 #map {
-  position: absolute;
+  position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   width: 100%;
-  height: 100%;
+  height: 100%;       /* ✅ 여기서도 100vh → 100%로 변경 */
+  z-index: 0;
 }
+
+
 
 /* ✅ preview card */
 #info-preview-card {
@@ -35,6 +40,18 @@ body, html {
   box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.15);
   overflow-y: auto;
 }
+
+#close-preview {
+  position: absolute;
+  top: 12px;
+  right: 12px;  /* ✅ 오른쪽 정렬 */
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
 
 .info-preview-content {
   display: flex;

@@ -1,32 +1,32 @@
 [
   {
-    "id": "pasta001",
-    "title": "성수온실",
+    "id": "seongsu_kkamang",
+    "title": "성수까망",
     "lat": 37.544345,
     "lng": 127.056743,
     "address": "서울 성동구 성수일로12길 20",
     "description": "성게알 파스타가 유명한 감성적인 식당",
     "category": "이탈리안",
-    "images": ["img/seongsu1.jpg", "img/seongsu1-2.jpg"]
+    "images": ["images/kkamang_1.jpg"]
   },
   {
-    "id": "pasta002",
-    "title": "까사디노아",
+    "id": "seongsu_onsil",
+    "title": "성수온실",
     "lat": 37.544920,
     "lng": 127.055210,
     "address": "서울 성동구 성수일로6길 25",
     "description": "정통 이탈리안 파스타와 분위기 좋은 와인바",
     "category": "이탈리안",
-    "images": ["img/seongsu2.jpg"]
+    "images": ["images/onsil_1.jpg"]
   },
   {
-    "id": "pasta003",
-    "title": "성수까망",
+    "id": "seongsu_peeps",
+    "title": "peeps",
     "lat": 37.543800,
     "lng": 127.057100,
     "address": "서울 성동구 아차산로17길 49",
     "description": "감태 명란 파스타와 퓨전 한식 느낌의 신상 식당",
     "category": "퓨전",
-    "images": ["img/seongsu3.jpg"]
+    "images": ["images/peeps_1.jpg"]
   }
 ]
