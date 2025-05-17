@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>성수 파스타 리뷰 지도</title>
+
+  <!-- 웹폰트 (한글 가독성) -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet" />
+
+  <!-- Kakao Maps API -->
+  <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=bd5ad6d3034dbd38379e6f449abf0cdc"></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>🍝 성수 파스타 리뷰 지도</h1>
+  <div id="map" style="width: 100%; height: 80vh;"></div>
+
+  <!-- JS -->
+  <script src="script.js"></script>
+
+  <!-- ✅ 절반 카드형 정보창 (preview) -->
+<div id="info-preview-card" class="hidden">
+  <button id="close-preview" class="close-btn">✖</button>
+  <div class="info-preview-content">
+    <h3 id="preview-title">식당 이름</h3>
+    <div class="preview-image-wrapper">
+      <img id="preview-image" src="" alt="식당 이미지" />
+    </div>
+    <p id="preview-description">식당 설명</p>
+    <button id="view-full-button" class="view-full-btn">
+      전체 정보 보기 <span class="arrow-icon">⬆</span>
+    </button>
+  </div>
+</div>
+
+<!-- ✅ 전체 카드형 정보창 (full) -->
+<div id="info-full-card" class="hidden">
+  <button id="back-to-preview">⬇ 돌아가기</button>
+  <div class="info-full-content">
+    <h2 id="full-title">식당 이름</h2>
+
+    <!-- 이미지 캐러셀 -->
+    <div class="carousel-container">
+      <div class="carousel-images" id="carousel-images"></div>
+      <button class="carousel-btn left" id="carousel-prev">←</button>
+      <button class="carousel-btn right" id="carousel-next">→</button>
+    </div>
+
+    <div class="info-row">
+      <span class="label">설명:</span>
+      <span class="content" id="full-description"></span>
+    </div>
+    <div class="info-row">
+      <span class="label">카테고리:</span>
+      <span class="content" id="full-type">이탈리안</span>
+    </div>
+
+    <!-- 리뷰 목록 -->
+    <button id="toggle-reviews" class="info-button">리뷰 보기 ⬇</button>
+    <div id="review-section" class="hidden">
+      <h4>리뷰</h4>
+      <ul id="review-list"></ul>
+      <a id="review-button" class="write-review-btn" href="#" target="_blank">
+        ➕ 리뷰 작성하기
+      </a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
