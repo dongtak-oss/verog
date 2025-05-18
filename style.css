@@ -5,14 +5,26 @@
   box-sizing: border-box;
 }
 
+/* 기본 공통 설정 (스크롤 제한 없음) */
 html, body {
   margin: 0;
   padding: 0;
-  width: 100%;       /* ✅ 이거 추가 */
-  height: 100%;       /* ✅ 100vh → 100%로 변경 */
-  overflow: hidden;
-  position: relative; /* ✅ 이 줄도 추가 (렌더링 안정성 확보) */
+  width: 100%;
+  position: relative;
 }
+
+/* 지도 페이지 전용 (스크롤 막기) */
+body:not(.full-review) {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* 전체 리뷰 페이지 전용 (스크롤 허용) */
+body.full-review {
+  height: auto;
+  overflow-y: auto;
+}
+
 
 
 
@@ -183,11 +195,14 @@ html, body {
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   font-size: 14px;
   color: #333;
+  margin-bottom: 24px;
+  position: relative; /* 총점 위치를 고정하기 위해 필요 */
 }
+
 
 /* ✅ 작성자 + 날짜 */
 .review-header {
@@ -201,41 +216,51 @@ html, body {
 
 /* ✅ 항목별 평가 영역 */
 .review-item {
-  margin-top: 10px;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin-bottom: 10px;
 }
+
 .review-item strong {
-  display: inline-block;
-  min-width: 90px;
+  min-width: 80px;
   font-weight: 600;
   color: #222;
 }
+
 .review-item .comment {
-  margin: 4px 0 0 12px;
+  font-size: 14px;
   color: #555;
-  font-size: 13px;
+  line-height: 1.5;
 }
+
 
 /* ✅ 총평 영역 */
 .review-summary {
   margin-top: 16px;
-  padding-top: 10px;
-  border-top: 1px dashed #ccc;
+  padding: 12px;
+  background: #f9f9f9;
+  border-left: 4px solid #3182f6;
+  border-radius: 6px;
   font-style: italic;
-  color: #444;
+  color: #333;
 }
 .review-summary strong {
-  display: inline-block;
-  margin-bottom: 4px;
+  display: block;
+  margin-bottom: 6px;
 }
+
 
 /* ✅ 총점 표시 */
 .review-footer {
-  margin-top: 12px;
-  text-align: right;
+  position: absolute;
+  bottom: 16px;
+  right: 20px;
   font-weight: bold;
+  font-size: 14px;
   color: #111;
-  font-size: 15px;
 }
+
 
 /* ✅ 리뷰 액션 버튼들 */
 .review-actions {
@@ -342,5 +367,49 @@ html, body {
   border-radius: 10px;
   object-fit: cover;
 }
+
+
+
+
+/* ✅ 지도 페이지 전용 설정 */
+body:not(.full-review) {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ✅ 전체 리뷰 페이지 전용 설정 */
+body.full-review {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: #fff;
+  color: #222;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  line-height: 1.75;
+  font-size: 16px;
+  height: auto;
+  overflow-y: auto;
+}
+
+body.full-review h1 {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+body.full-review h2 {
+  font-size: 20px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 6px;
+  margin-top: 32px;
+  margin-bottom: 12px;
+  color: #444;
+}
+
+body.full-review p {
+  margin-bottom: 20px;
+}
+
 
 
