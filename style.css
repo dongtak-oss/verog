@@ -62,6 +62,7 @@ html, body {
 #preview-title {
   font-size: 18px;
   font-weight: bold;
+  text-align: center; /* ← 가운데 정렬 핵심 */
 }
 
 #preview-description {
@@ -116,14 +117,16 @@ html, body {
 }
 
 #back-to-preview {
+  display: block;              /* ← 이 줄이 꼭 필요합니다! */
   background: #eee;
   border: none;
   border-radius: 8px;
   padding: 8px 12px;
   font-size: 14px;
-  margin-bottom: 12px;
   cursor: pointer;
+  margin: 0 auto 12px auto;    /* ← 수평 가운데 정렬 */
 }
+
 
 .info-full-content {
   display: flex;
@@ -137,6 +140,7 @@ html, body {
   color: #222;
   border-bottom: 1px solid #eee;
   padding-bottom: 6px;
+  text-align: center; /* ← 가운데 정렬 핵심 */
 }
 
 .info-row {
@@ -176,32 +180,61 @@ html, body {
 
 /* ✅ 각각의 리뷰 카드 */
 .review-card {
+  background: #fff;
   border: 1px solid #ddd;
   border-radius: 12px;
-  padding: 14px 16px;
-  background: #fefefe;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  font-size: 14px;
+  color: #333;
 }
 
-/* ✅ 리뷰 카드 내부 요소 */
+/* ✅ 작성자 + 날짜 */
 .review-header {
   display: flex;
   justify-content: space-between;
+  font-weight: 600;
   font-size: 14px;
-  margin-bottom: 4px;
   color: #555;
+  margin-bottom: 12px;
 }
 
-.review-stars {
+/* ✅ 항목별 평가 영역 */
+.review-item {
+  margin-top: 10px;
+}
+.review-item strong {
+  display: inline-block;
+  min-width: 90px;
+  font-weight: 600;
+  color: #222;
+}
+.review-item .comment {
+  margin: 4px 0 0 12px;
+  color: #555;
   font-size: 13px;
-  color: #666;
-  margin-bottom: 6px;
 }
 
-.review-comment {
-  font-size: 14px;
-  color: #333;
-  line-height: 1.5;
+/* ✅ 총평 영역 */
+.review-summary {
+  margin-top: 16px;
+  padding-top: 10px;
+  border-top: 1px dashed #ccc;
+  font-style: italic;
+  color: #444;
+}
+.review-summary strong {
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+/* ✅ 총점 표시 */
+.review-footer {
+  margin-top: 12px;
+  text-align: right;
+  font-weight: bold;
+  color: #111;
+  font-size: 15px;
 }
 
 /* ✅ 리뷰 액션 버튼들 */
@@ -212,19 +245,26 @@ html, body {
 }
 
 .write-review-btn {
-  background: #f1f1f1;
+  display: inline-block;
+  margin-top: 8px;
+  padding: 8px 16px;
+  background: #3182f6;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
   border-radius: 8px;
-  padding: 8px 12px;
-  font-size: 13px;
+  border: none;
   text-decoration: none;
-  color: #333;
-  border: 1px solid #ccc;
-  transition: all 0.2s ease;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
 
 .write-review-btn:hover {
-  background: #eaeaea;
+  background: #226ad6;
 }
+
+
+
 
 
 /* ✅ 이미지 캐러셀 */
@@ -271,30 +311,6 @@ html, body {
 #review-list li {
   padding: 6px 0;
   border-bottom: 1px solid #eee;
-  font-size: 14px;
-}
-.review.positive {
-  background: #e0f7e9;
-  color: #1b5e20;
-  border-radius: 6px;
-  padding: 6px 10px;
-}
-.review.negative {
-  background: #ffecec;
-  color: #b71c1c;
-  border-radius: 6px;
-  padding: 6px 10px;
-}
-
-.write-review-btn {
-  display: inline-block;
-  margin-top: 8px;
-  padding: 8px 16px;
-  background: #3182f6;
-  color: white;
-  font-weight: bold;
-  border-radius: 8px;
-  text-decoration: none;
   font-size: 14px;
 }
 

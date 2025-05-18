@@ -60,31 +60,64 @@ fetch("data/review.json")
 
     initCarousel(location.images || []);
 
-    // ✅ 리뷰 렌더링
-  const reviews = reviewData[location.id] || [];
+    // ✅ 리뷰 렌더링 (항목별 평가 + 코멘트 + 총평)
+const reviews = reviewData[location.id] || [];
 
-  if (reviews.length > 0) {
-    document.getElementById("review-list").innerHTML = reviews.map(r => `
-  <li class="review-card">
-    <div class="review-header">
-      <span>${r.작성자 || "익명"}</span>
-      <span>${r.작성일 || "날짜 없음"}</span>
-    </div>
-    <div class="review-stars">
-      맛: ${r["맛"]} | 가성비: ${r["가성비"]} | 분위기: ${r["분위기"]} | 친절·위생: ${r["친절위생"]} | 취향: ${r["개인취향"]}
-    </div>
-    <div class="review-comment">
-      “${r["한줄평"]}”
-    </div>
-    <div class="review-footer">
-      총점: <strong>${r["총점"]?.toFixed(1) ?? "?"} ⭐</strong>
-    </div>
-  </li>
-`).join('');
+if (reviews.length > 0) {
+  document.getElementById("review-list").innerHTML = reviews.map(r => `
+    <li class="review-card">
+      <div class="review-header">
+        <span>${r.작성자 || "익명"}</span>
+        <span>${r.작성일 || "날짜 없음"}</span>
+      </div>
 
-  } else {
-    document.getElementById("review-list").innerHTML = "<li>아직 리뷰가 없습니다.</li>";
-  }
+      <div class="review-item">
+        <strong>🍝 맛:</strong> ${r["맛"]}점
+        <p class="comment">→ ${r["맛_코멘트"] || ""}</p>
+      </div>
+
+      <div class="review-item">
+        <strong>💸 가성비:</strong> ${r["가성비"]}점
+        <p class="comment">→ ${r["가성비_코멘트"] || ""}</p>
+      </div>
+
+      <div class="review-item">
+        <strong>🎵 분위기:</strong> ${r["분위기"]}점
+        <p class="comment">→ ${r["분위기_코멘트"] || ""}</p>
+      </div>
+
+      <div class="review-item">
+        <strong>🧼 친절·위생:</strong> ${r["친절위생"]}점
+        <p class="comment">→ ${r["친절위생_코멘트"] || ""}</p>
+      </div>
+
+      <div class="review-item">
+        <strong>🌈 취향:</strong> ${r["개인취향"]}점
+        <p class="comment">→ ${r["개인취향_코멘트"] || ""}</p>
+      </div>
+
+      <div class="review-summary">
+        <strong>📝 총평</strong>
+        <p>→ ${r["한줄평"] || ""}</p>
+      </div>
+
+       ${r["hasFullReview"] && r["id"] ? `
+      <div class="review-full-button">
+        <a class="write-review-btn" href="full_reviews/${r["id"]}.html" target="_blank">📄 전체 리뷰 보기</a>
+      </div>
+    ` : ""}
+
+
+
+      <div class="review-footer">
+        ⭐ 총점: <strong>${r["총점"]?.toFixed(1) ?? "?"}</strong>
+      </div>
+    </li>
+  `).join('');
+} else {
+  document.getElementById("review-list").innerHTML = "<li>아직 리뷰가 없습니다.</li>";
+}
+
 
     // 리뷰 작성 링크 설정
     const title = encodeURIComponent(location.title);
@@ -110,13 +143,9 @@ fetch("data/review.json")
     });
   }
 
-  // ✅ 상세 리뷰 버튼 (info-full-card 안)
-document.getElementById("view-detailed-review").addEventListener("click", () => {
-  const location = JSON.parse(document.getElementById("info-full-card").dataset.locationData);
-  if (location && location.id) {
-    window.location.href = `full_reviews/${location.id}.html`;
-  }
-});
+
+
+
 
 
   const backButton = document.getElementById("back-to-preview");
