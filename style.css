@@ -317,3 +317,30 @@ html, body {
 .hidden {
   display: none !important;
 }
+
+#carousel-images-wrapper {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+#carousel-images {
+  display: flex;
+  transition: transform 0.3s ease;
+  width: 100%;
+}
+
+#carousel-images img {
+  width: 100%;
+  object-fit: cover; /* or contain, depending on what you want */
+  flex-shrink: 0;
+}
+
+#full-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+
