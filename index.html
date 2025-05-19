@@ -95,54 +95,64 @@
       <span class="content" id="full-type">이탈리안</span>
     </div>
 
-    <!-- ✅ 리뷰 목록 (항상 보이는 형태) -->
-<div id="review-section">
-  <h4>리뷰</h4>
-  <ul id="review-list" class="review-list">
-    <!-- 직접 테스트용으로 넣은 리뷰 카드 -->
-    <li class="review-card">
-      <div class="review-header">
-        <span>익명</span>
+    <!-- ✅ 리뷰 목록 -->
+<div id="review-section" class="px-4 py-6">
+  <h4 class="text-lg font-semibold mb-4">리뷰</h4>
+  <ul id="review-list" class="space-y-6">
+    
+    <!-- ✅ 리뷰 카드 -->
+    <li class="review-card bg-white shadow-md rounded-xl p-4">
+      
+      <!-- 리뷰 헤더 -->
+      <div class="flex justify-between items-center mb-2 text-sm text-gray-600">
+        <span class="font-medium">익명</span>
         <span>날짜 없음</span>
       </div>
 
-      <div class="review-item">
-        <strong>🍝 맛:</strong> 1점
-        <p class="comment">→ 성게알 풍미가 진하고 면도 탱글탱글했어요.</p>
+      <!-- 항목별 평가 -->
+      <div class="space-y-2 text-sm">
+        <div class="flex items-start gap-1">
+          <strong>🍝 맛:</strong>
+          <span>⭐</span>
+          <p class="ml-1 text-gray-700">→ 성게알 풍미가 진하고 면도 탱글탱글했어요.</p>
+        </div>
+        <div class="flex items-start gap-1">
+          <strong>💸 가성비:</strong>
+          <span>⭐½</span>
+          <p class="ml-1 text-gray-700">→ 맛은 있지만 가격은 살짝 부담됐어요.</p>
+        </div>
+        <div class="flex items-start gap-1">
+          <strong>🎵 분위기:</strong>
+          <span>⭐</span>
+          <p class="ml-1 text-gray-700">→ 조용하고 조명이 예뻐서 분위기가 좋았어요.</p>
+        </div>
+        <div class="flex items-start gap-1">
+          <strong>🧼 친절·위생:</strong>
+          <span>⭐½</span>
+          <p class="ml-1 text-gray-700">→ 서빙은 빠르지만 테이블 위 정리는 조금 아쉬웠습니다.</p>
+        </div>
+        <div class="flex items-start gap-1">
+          <strong>🌈 취향:</strong>
+          <span>⭐</span>
+          <p class="ml-1 text-gray-700">→ 제 입맛엔 딱 맞았어요.</p>
+        </div>
       </div>
 
-      <div class="review-item">
-        <strong>💸 가성비:</strong> 0.5점
-        <p class="comment">→ 맛은 있지만 가격은 살짝 부담됐어요.</p>
-      </div>
-
-      <div class="review-item">
-        <strong>🎵 분위기:</strong> 1점
-        <p class="comment">→ 조용하고 조명이 예뻐서 분위기가 좋았어요.</p>
-      </div>
-
-      <div class="review-item">
-        <strong>🧼 친절·위생:</strong> 0.5점
-        <p class="comment">→ 서빙은 빠르지만 테이블 위 정리는 조금 아쉬웠습니다.</p>
-      </div>
-
-      <div class="review-item">
-        <strong>🌈 취향:</strong> 1점
-        <p class="comment">→ 제 입맛엔 딱 맞았어요.</p>
-      </div>
-
-      <div class="review-summary">
+      <!-- 총평 -->
+      <div class="mt-4 p-3 bg-gray-100 rounded-md text-sm text-gray-800">
         <strong>📝 총평</strong>
         <p>→ 전체적으로 만족스러웠지만 가격이 살짝 아쉽네요.</p>
       </div>
 
-
-      <div class="review-footer">
-        ⭐ 총점: <strong>4.0</strong>
+      <!-- 총점 -->
+      <div class="mt-2 text-right font-semibold text-yellow-600 text-sm">
+        ⭐ 총점: <span class="text-lg">4.0</span>
       </div>
     </li>
+
   </ul>
 </div>
+
 
 
   <!-- ✅ 버튼들을 아래 정렬 -->
