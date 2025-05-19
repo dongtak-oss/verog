@@ -13,27 +13,64 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
+  <!-- ✅ Tailwind CDN 추가 -->
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
+
+  <div class="bg-yellow-100 p-4 text-center text-lg font-bold text-yellow-800">
+  Tailwind 정상 작동 중! 🎉
+</div>
+
    <div id="map"></div> <!-- ✅ 화면 전체 덮는 지도 -->
 
   <!-- JS -->
   <script src="script.js"></script>
 
-  <!-- ✅ 절반 카드형 정보창 (preview) -->
-<div id="info-preview-card" class="hidden">
-  <button id="close-preview" class="close-btn">✖</button>
-  <div class="info-preview-content">
-    <h3 id="preview-title">식당 이름</h3>
-    <div class="preview-image-wrapper">
-      <img id="preview-image" src="" alt="식당 이미지" />
+  <!-- ✅ 새로 리팩토링된 preview-card -->
+<div id="info-preview-card" class="fixed bottom-0 w-full max-h-[60%] bg-white z-[1000] p-4 rounded-t-2xl shadow-lg space-y-4 overflow-y-auto hidden">
+
+  <!-- 닫기 버튼 -->
+  <button id="close-preview" class="absolute top-3 right-4 text-xl text-gray-400 hover:text-gray-600">
+    ✖
+  </button>
+
+  <!-- 제목 -->
+  <h3 id="preview-title" class="text-xl font-bold text-center text-gray-800">
+    식당 이름
+  </h3>
+
+  <!-- 대표 이미지 -->
+  <div class="rounded-xl overflow-hidden aspect-[16/9] bg-gray-100">
+    <img id="preview-image" src="" alt="식당 이미지" class="w-full h-full object-cover" />
+  </div>
+
+  <!-- 대표 설명 -->
+  <p id="preview-description" class="text-sm text-gray-600 text-center">
+    식당 설명
+  </p>
+
+  <!-- 별점 평균 -->
+  <div class="flex justify-center gap-6 text-sm text-gray-700">
+    <div class="flex items-center gap-1">
+      <span class="text-yellow-400">⭐️</span>
+      <span>상위 리뷰어 <strong>4.5</strong></span>
     </div>
-    <p id="preview-description">식당 설명</p>
-    <button id="view-full-button" class="view-full-btn">
-      전체 정보 보기 <span class="arrow-icon">⬆</span>
+    <div class="flex items-center gap-1">
+      <span class="text-yellow-400">⭐️</span>
+      <span>일반 유저 <strong>3.8</strong></span>
+    </div>
+  </div>
+
+  <!-- 전체 보기 버튼 -->
+  <div class="text-center pt-2">
+    <button id="view-full-button" class="w-full bg-gray-100 hover:bg-gray-200 text-blue-600 font-semibold py-2 rounded-lg text-sm">
+      전체 정보 보기 ⬆
     </button>
   </div>
+
 </div>
+
 
 <!-- ✅ 전체 카드형 정보창 (full) -->
 <div id="info-full-card" class="hidden">
@@ -118,6 +155,7 @@
 </div>
 
 </div>
+
 
 
 </body>
