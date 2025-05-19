@@ -27,49 +27,52 @@
   <!-- JS -->
   <script src="script.js"></script>
 
-  <!-- ✅ 새로 리팩토링된 preview-card -->
-<div id="info-preview-card" class="fixed bottom-0 w-full max-h-[60%] bg-white z-[1000] p-4 rounded-t-2xl shadow-lg space-y-4 overflow-y-auto hidden">
+  <!-- ✅ 리디자인된 절반 카드형 정보창 -->
+<div id="info-preview-card"
+  class="fixed bottom-0 left-0 w-full max-h-[28%] bg-white z-[1000] px-4 py-3 rounded-t-2xl shadow-lg flex items-center gap-4 overflow-hidden hidden">
+
+  <!-- 썸네일 이미지 -->
+  <div class="w-[80px] h-[80px] rounded-lg overflow-hidden flex-shrink-0 bg-gray-200">
+    <img id="preview-image" src="your_image_url.jpg" alt="썸네일" class="w-full h-full object-cover" />
+  </div>
+
+  <!-- 텍스트 정보 -->
+  <div class="flex flex-col justify-between flex-grow min-w-0">
+
+    <!-- 식당 이름 -->
+    <h3 id="preview-title" class="text-base font-bold text-gray-800 truncate">
+      성수까망
+    </h3>
+
+    <!-- 한줄 설명 -->
+    <p id="preview-description" class="text-sm text-gray-600 line-clamp-2">
+      성게알 파스타가 유명한 감성적인 식당
+    </p>
+
+    <!-- 별점 평균 -->
+    <div class="flex gap-3 text-xs text-gray-700 pt-1">
+      <span class="flex items-center gap-1">
+        <span class="text-yellow-400">⭐</span> 상위 <strong>4.5</strong>
+      </span>
+      <span class="flex items-center gap-1">
+        <span class="text-yellow-400">⭐</span> 일반 <strong>3.8</strong>
+      </span>
+    </div>
+  </div>
 
   <!-- 닫기 버튼 -->
-  <button id="close-preview" class="absolute top-3 right-4 text-xl text-gray-400 hover:text-gray-600">
+  <button id="close-preview" class="absolute top-2 right-4 text-lg text-gray-400 hover:text-gray-600">
     ✖
   </button>
-
-  <!-- 제목 -->
-  <h3 id="preview-title" class="text-xl font-bold text-center text-gray-800">
-    식당 이름
-  </h3>
-
-  <!-- 대표 이미지 -->
-  <div class="rounded-xl overflow-hidden aspect-[16/9] bg-gray-100">
-    <img id="preview-image" src="" alt="식당 이미지" class="w-full h-full object-cover" />
-  </div>
-
-  <!-- 대표 설명 -->
-  <p id="preview-description" class="text-sm text-gray-600 text-center">
-    식당 설명
-  </p>
-
-  <!-- 별점 평균 -->
-  <div class="flex justify-center gap-6 text-sm text-gray-700">
-    <div class="flex items-center gap-1">
-      <span class="text-yellow-400">⭐️</span>
-      <span>상위 리뷰어 <strong>4.5</strong></span>
-    </div>
-    <div class="flex items-center gap-1">
-      <span class="text-yellow-400">⭐️</span>
-      <span>일반 유저 <strong>3.8</strong></span>
-    </div>
-  </div>
-
-  <!-- 전체 보기 버튼 -->
-  <div class="text-center pt-2">
-    <button id="view-full-button" class="w-full bg-gray-100 hover:bg-gray-200 text-blue-600 font-semibold py-2 rounded-lg text-sm">
-      전체 정보 보기 ⬆
-    </button>
-  </div>
-
 </div>
+
+<!-- ✅ 전체 정보 보기 버튼 (카드 바깥에 둬도 OK) -->
+<div class="fixed bottom-[calc(28%+8px)] left-0 w-full px-4 z-[1000]">
+  <button id="view-full-button" class="w-full bg-gray-100 hover:bg-gray-200 text-blue-600 font-semibold py-2 rounded-lg text-sm">
+    전체 정보 보기 ⬆
+  </button>
+</div>
+
 
 
 <!-- ✅ 전체 카드형 정보창 (full) -->
