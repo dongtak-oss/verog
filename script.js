@@ -1,4 +1,9 @@
+// ✅ DOM 로드 후 실행
 document.addEventListener("DOMContentLoaded", () => {
+
+  const previewCard = document.getElementById("info-preview-card");
+  const fullCard = document.getElementById("info-full-card");
+
   const mapContainer = document.getElementById("map");
   const mapOption = {
     center: new kakao.maps.LatLng(37.544345, 127.056743), // 성수역 중심
@@ -10,7 +15,14 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentSlide = 0;
   let reviewData = {}; // 추후 확장
 
-  // ✅ restaurants.json 불러오기
+  // ✅ 지도 클릭 시 preview 정보창 닫기 (단 fullCard가 떠 있지 않을 때만)
+  kakao.maps.event.addListener(map, 'click', () => {
+    if (fullCard.classList.contains("hidden")) {
+      previewCard.classList.add("hidden");
+    }
+  });
+
+  // ✅ 1. 마커 표시 restaurants.json 불러오기 
   fetch("data/restaurants.json")
     .then(res => res.json())
     .then(locations => {
@@ -29,7 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    // ✅ 리뷰 데이터 불러오기
+
+    // ✅ 2. 리뷰 데이터 불러오기
 fetch("data/review.json")
   .then(res => res.json())
   .then(data => {
@@ -41,7 +54,7 @@ fetch("data/review.json")
   });
 
 
-  // ✅ preview-card 표시
+  // ✅ 3. preview-card 표시
   function showPreviewCard(location) {
     document.getElementById("preview-title").textContent = location.title;
     document.getElementById("preview-description").textContent = location.description || '';
@@ -52,7 +65,7 @@ fetch("data/review.json")
     document.getElementById("info-full-card").classList.add("hidden");
   }
 
-  // ✅ full-card 전환
+  // ✅ 4. full-card 전환
   function showFullCard(location) {
     document.getElementById("full-title").textContent = location.title;
     document.getElementById("full-description").textContent = location.description || '';
@@ -60,7 +73,7 @@ fetch("data/review.json")
 
     initCarousel(location.images || []);
 
-    // ✅ 리뷰 렌더링 (항목별 평가 + 코멘트 + 총평)
+    // ✅ 5. 리뷰 렌더링 (항목별 평가 + 코멘트 + 총평)
 const reviews = reviewData[location.id] || [];
 
 if (reviews.length > 0) {
@@ -143,12 +156,7 @@ if (reviews.length > 0) {
     });
   }
 
-
-
-
-
-
-  const backButton = document.getElementById("back-to-preview");
+   const backButton = document.getElementById("back-to-preview");
   if (backButton) {
     backButton.addEventListener("click", () => {
       const data = document.getElementById("info-full-card").dataset.locationData;
@@ -166,15 +174,18 @@ if (reviews.length > 0) {
     });
   }
 
-  const toggleBtn = document.getElementById("toggle-reviews");
-  const reviewSection = document.getElementById("review-section");
-  if (toggleBtn && reviewSection) {
-    toggleBtn.addEventListener("click", () => {
-      const isHidden = reviewSection.classList.contains("hidden");
-      reviewSection.classList.toggle("hidden", !isHidden);
-      toggleBtn.textContent = isHidden ? "리뷰 접기 ⬆" : "리뷰 보기 ⬇";
-    });
+  previewCard.addEventListener("click", (e) => {
+  // 버튼 클릭 등은 무시하고 전체 카드 배경 클릭만 허용
+  if (e.target.closest("button, a")) return;
+
+  const data = previewCard.dataset.locationData;
+  if (data) {
+    const location = JSON.parse(data);
+    showFullCard(location);
   }
+});
+
+
 
   // ✅ 이미지 캐러셀
   function initCarousel(images) {
@@ -210,4 +221,8 @@ if (reviews.length > 0) {
     updateCarousel();
   });
 });
+
+
+
+
 

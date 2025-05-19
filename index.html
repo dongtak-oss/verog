@@ -28,8 +28,10 @@
   <script src="script.js"></script>
 
   <!-- ✅ 좌우 정렬을 적용한 절반 카드형 정보창 -->
+<!-- ✅ 최종 권장 형태 -->
 <div id="info-preview-card"
   class="fixed bottom-0 left-0 w-full max-w-xl mx-auto bg-white z-[1000] p-4 rounded-t-2xl shadow-lg flex items-center gap-4 overflow-hidden hidden">
+
 
   <!-- 이미지 (왼쪽) -->
   <div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-gray-200">
@@ -63,13 +65,6 @@
   <!-- 닫기 버튼 -->
   <button id="close-preview" class="absolute top-2 right-4 text-lg text-gray-400 hover:text-gray-600">
     ✖
-  </button>
-</div>
-
-<!-- 전체 정보 보기 버튼은 별도 div로 분리해도 좋습니다 -->
-<div class="fixed bottom-[calc(24%+8px)] left-0 w-full px-4 z-[1000]">
-  <button id="view-full-button" class="w-full bg-gray-100 hover:bg-gray-200 text-blue-600 font-semibold py-2 rounded-lg text-sm">
-    전체 정보 보기 ⬆
   </button>
 </div>
 
