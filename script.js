@@ -1,48 +1,122 @@
-// ✅ DOM 로드 후 실행
-document.addEventListener("DOMContentLoaded", () => {
+// ✅ 1. 지도 페이지인지 여부 확인
+const isMapPage = document.getElementById("map") !== null;
 
+// ✅ 2. DOM 로드 후 실행
+document.addEventListener("DOMContentLoaded", () => {
   const previewCard = document.getElementById("info-preview-card");
   const fullCard = document.getElementById("info-full-card");
-
-  const mapContainer = document.getElementById("map");
-  const mapOption = {
-    center: new kakao.maps.LatLng(37.544345, 127.056743), // 성수역 중심
-    level: 3
-  };
-
-  const map = new kakao.maps.Map(mapContainer, mapOption);
-  let allMarkers = [];
   let currentSlide = 0;
   let reviewData = {}; // 추후 확장
 
-  // ✅ 지도 클릭 시 preview 정보창 닫기 (단 fullCard가 떠 있지 않을 때만)
-  kakao.maps.event.addListener(map, 'click', () => {
-    if (fullCard.classList.contains("hidden")) {
-      previewCard.classList.add("hidden");
-    }
-  });
+  // ✅ 3. 지도 관련 코드는 지도 페이지에서만 실행
+  if (isMapPage) {
+    const mapContainer = document.getElementById("map");
+    const mapOption = {
+      center: new kakao.maps.LatLng(37.544345, 127.056743),
+      level: 3
+    };
 
-  // ✅ 1. 마커 표시 restaurants.json 불러오기 
-  fetch("data/restaurants.json")
-    .then(res => res.json())
-    .then(locations => {
-      locations.forEach(location => {
-        const marker = new kakao.maps.Marker({
-          map,
-          position: new kakao.maps.LatLng(location.lat, location.lng),
-          title: location.title
-        });
+    const map = new kakao.maps.Map(mapContainer, mapOption);
+    let allMarkers = [];
 
-        kakao.maps.event.addListener(marker, 'click', () => {
-          showPreviewCard(location);
-        });
-
-        allMarkers.push({ marker, data: location });
-      });
+    kakao.maps.event.addListener(map, 'click', () => {
+      if (fullCard.classList.contains("hidden")) {
+        previewCard.classList.add("hidden");
+      }
     });
 
+    // ✅ 마커 표시
+    fetch("data/restaurants.json")
+      .then(res => res.json())
+      .then(locations => {
+        locations.forEach(location => {
+          const marker = new kakao.maps.Marker({
+            map,
+            position: new kakao.maps.LatLng(location.lat, location.lng),
+            title: location.title
+          });
 
-    // ✅ 2. 리뷰 데이터 불러오기
+          kakao.maps.event.addListener(marker, 'click', () => {
+            showPreviewCard(location);
+          });
+
+          allMarkers.push({ marker, data: location });
+        });
+      });
+  }
+
+
+  // 4.리스트 전용
+  if (!isMapPage) {
+  const tabSeongsu = document.getElementById("tab-seongsu");
+  const tabTestlab = document.getElementById("tab-testlab");
+  const mapButton = document.getElementById("map-button");
+
+  function activateTab(tabName) {
+    if (tabName === "seongsu") {
+      tabSeongsu.classList.add("border-black", "text-black");
+      tabSeongsu.classList.remove("text-gray-500");
+      tabTestlab.classList.remove("border-black", "text-black");
+      tabTestlab.classList.add("text-gray-500");
+      mapButton.classList.remove("hidden");
+      loadCards("data/restaurants.json");
+    } else {
+      tabTestlab.classList.add("border-black", "text-black");
+      tabTestlab.classList.remove("text-gray-500");
+      tabSeongsu.classList.remove("border-black", "text-black");
+      tabSeongsu.classList.add("text-gray-500");
+      mapButton.classList.add("hidden");
+      loadCards("data/testlab.json");
+    }
+  }
+
+  function loadCards(jsonPath) {
+    fetch(jsonPath)
+      .then(res => res.json())
+      .then(locations => {
+        const container = document.getElementById("card-list");
+        container.innerHTML = "";
+
+        locations.forEach(location => {
+          const card = document.createElement("div");
+          card.className = "flex bg-white rounded-xl shadow p-4 items-start gap-4 cursor-pointer hover:bg-gray-50 transition";
+
+          card.innerHTML = `
+            <div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
+              <img src="${location.images?.[0] || ''}" alt="썸네일" class="w-full h-full object-cover" />
+            </div>
+            <div class="flex flex-col justify-between min-w-0 flex-grow">
+              <h3 class="font-bold text-base text-gray-800 truncate">${location.title}</h3>
+              <p class="text-sm text-gray-600 line-clamp-2">${location.description || ''}</p>
+              <div class="flex gap-3 text-xs text-gray-700 pt-1">
+                <span class="flex items-center gap-1">
+                  <span class="text-yellow-400">⭐</span> 상위 <strong>${location.rating_high ?? "-"}</strong>
+                </span>
+                <span class="flex items-center gap-1">
+                  <span class="text-yellow-400">⭐</span> 일반 <strong>${location.rating_low ?? "-"}</strong>
+                </span>
+              </div>
+            </div>
+          `;
+
+          card.addEventListener("click", () => {
+            showFullCard(location);
+          });
+
+          container.appendChild(card);
+        });
+      });
+  }
+
+  tabSeongsu.addEventListener("click", () => activateTab("seongsu"));
+  tabTestlab.addEventListener("click", () => activateTab("testlab"));
+
+  activateTab("seongsu");
+}
+
+
+
+  // ✅ 5. 리뷰 데이터는 공통으로 사용되므로 마지막에 실행 (조건문 밖에 둬도 됨)
 fetch("data/review.json")
   .then(res => res.json())
   .then(data => {
@@ -56,6 +130,7 @@ fetch("data/review.json")
 
   // ✅ 3. preview-card 표시
   function showPreviewCard(location) {
+  if (!document.getElementById("info-preview-card")) return; // index.html에서는 실행 안 함
     document.getElementById("preview-title").textContent = location.title;
     document.getElementById("preview-description").textContent = location.description || '';
     document.getElementById("preview-image").src =
@@ -157,15 +232,24 @@ if (reviews.length > 0) {
   }
 
    const backButton = document.getElementById("back-to-preview");
-  if (backButton) {
-    backButton.addEventListener("click", () => {
+if (backButton) {
+  backButton.addEventListener("click", () => {
+    const isMapPage = document.getElementById("map") !== null;
+
+    if (isMapPage) {
+      // 지도 화면에서는 previewCard로 되돌림
       const data = document.getElementById("info-full-card").dataset.locationData;
       if (data) {
         const location = JSON.parse(data);
         showPreviewCard(location);
       }
-    });
-  }
+    } else {
+      // 리스트 화면에서는 그냥 fullCard만 닫음
+      document.getElementById("info-full-card").classList.add("hidden");
+    }
+  });
+}
+
 
   const closePreviewBtn = document.getElementById("close-preview");
   if (closePreviewBtn) {
