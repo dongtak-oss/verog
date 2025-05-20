@@ -39,40 +39,99 @@
     </a>
   </div>
 
-  <!-- ✅ 전체 카드형 정보창 (리스트 & 지도 통합용) -->
-<div id="info-full-card" class="hidden fixed inset-0 bg-white z-[1000] overflow-y-auto">
-  <div class="info-header px-4 pt-4 pb-2 sticky top-0 bg-white z-10 border-b">
-    <button id="back-to-preview" class="text-sm text-gray-500">← 돌아가기</button>
-    <h2 id="full-title" class="font-bold text-lg mt-2"></h2>
+  <!-- ✅ 전체 카드형 정보창 (full) -->
+<div id="info-full-card" class="hidden">
+  <div class="info-header">
+    <button id="back-to-preview" class="back-button">← 돌아가기</button>
+    <h2 id="full-title" class="info-title">식당 이름</h2>
   </div>
 
-  <!-- 이미지 캐러셀 -->
-  <div class="carousel-container relative overflow-hidden w-full">
-    <div class="carousel-images flex transition-transform duration-300 ease-in-out" id="carousel-images"></div>
-    <button class="carousel-btn left absolute left-2 top-1/2 -translate-y-1/2" id="carousel-prev">←</button>
-    <button class="carousel-btn right absolute right-2 top-1/2 -translate-y-1/2" id="carousel-next">→</button>
-  </div>
 
-  <!-- 설명 및 카테고리 -->
-  <div class="px-4 py-4 space-y-2 text-gray-700 text-sm">
-    <div><strong>설명:</strong> <span id="full-description"></span></div>
-    <div><strong>카테고리:</strong> <span id="full-type"></span></div>
-  </div>
+    <!-- 이미지 캐러셀 -->
+    <div class="carousel-container">
+      <div class="carousel-images" id="carousel-images"></div>
+      <button class="carousel-btn left" id="carousel-prev">←</button>
+      <button class="carousel-btn right" id="carousel-next">→</button>
+    </div>
 
-  <!-- 리뷰 섹션 -->
-  <div id="review-section" class="px-4 py-6">
-    <h4 class="text-lg font-semibold mb-4">리뷰</h4>
-    <ul id="review-list" class="space-y-6">
-      <!-- JS로 리뷰 삽입 -->
-    </ul>
-  </div>
+    <div class="info-row">
+      <span class="label">설명:</span>
+      <span class="content" id="full-description"></span>
+    </div>
+    <div class="info-row">
+      <span class="label">카테고리:</span>
+      <span class="content" id="full-type">이탈리안</span>
+    </div>
 
-  <!-- 리뷰 작성 버튼 -->
-  <div class="px-4 pb-8">
-    <a id="review-button" class="block w-full text-center bg-blue-500 text-white py-3 rounded-lg font-semibold" href="#" target="_blank">
+    <!-- ✅ 리뷰 목록 -->
+<div id="review-section" class="px-4 py-6">
+  <h4 class="text-lg font-semibold mb-4">리뷰</h4>
+  <ul id="review-list" class="space-y-6">
+    
+    <!-- ✅ 리뷰 카드 -->
+    <li class="review-card bg-white shadow-md rounded-xl p-4">
+      
+      <!-- 리뷰 헤더 -->
+      <div class="flex justify-between items-center mb-2 text-sm text-gray-600">
+        <span class="font-medium">익명</span>
+        <span>날짜 없음</span>
+      </div>
+
+      <!-- 항목별 평가 -->
+      <div class="space-y-2 text-sm">
+        <div class="flex items-start gap-1">
+          <strong>🍝 맛:</strong>
+          <span>⭐</span>
+          <p class="ml-1 text-gray-700">→ 성게알 풍미가 진하고 면도 탱글탱글했어요.</p>
+        </div>
+        <div class="flex items-start gap-1">
+          <strong>💸 가성비:</strong>
+          <span>⭐½</span>
+          <p class="ml-1 text-gray-700">→ 맛은 있지만 가격은 살짝 부담됐어요.</p>
+        </div>
+        <div class="flex items-start gap-1">
+          <strong>🎵 분위기:</strong>
+          <span>⭐</span>
+          <p class="ml-1 text-gray-700">→ 조용하고 조명이 예뻐서 분위기가 좋았어요.</p>
+        </div>
+        <div class="flex items-start gap-1">
+          <strong>🧼 친절·위생:</strong>
+          <span>⭐½</span>
+          <p class="ml-1 text-gray-700">→ 서빙은 빠르지만 테이블 위 정리는 조금 아쉬웠습니다.</p>
+        </div>
+        <div class="flex items-start gap-1">
+          <strong>🌈 취향:</strong>
+          <span>⭐</span>
+          <p class="ml-1 text-gray-700">→ 제 입맛엔 딱 맞았어요.</p>
+        </div>
+      </div>
+
+      <!-- 총평 -->
+      <div class="mt-4 p-3 bg-gray-100 rounded-md text-sm text-gray-800">
+        <strong>📝 총평</strong>
+        <p>→ 전체적으로 만족스러웠지만 가격이 살짝 아쉽네요.</p>
+      </div>
+
+      <!-- 총점 -->
+      <div class="mt-2 text-right font-semibold text-yellow-600 text-sm">
+        ⭐ 총점: <span class="text-lg">4.0</span>
+      </div>
+    </li>
+
+  </ul>
+</div>
+
+
+
+
+  <!-- ✅ 버튼들을 아래 정렬 -->
+  <div class="review-actions">
+    <a id="review-button" class="write-review-btn" href="#" target="_blank">
       ➕ 리뷰 작성하기
     </a>
   </div>
+</div>
+
 </div>
 
 
