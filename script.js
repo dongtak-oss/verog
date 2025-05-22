@@ -26,24 +26,44 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ✅ 마커 표시
-    fetch("data/restaurants.json")
-      .then(res => res.json())
-      .then(locations => {
-        locations.forEach(location => {
-          const marker = new kakao.maps.Marker({
-            map,
-            position: new kakao.maps.LatLng(location.lat, location.lng),
-            title: location.title
-          });
+   fetch("data/restaurants.json")
+  .then(res => res.json())
+  .then(locations => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const focusId = urlParams.get("id");
+    let focusTarget = null; // ✅ 포커스용 변수
 
-          kakao.maps.event.addListener(marker, 'click', () => {
-            showPreviewCard(location);
-          });
-
-          allMarkers.push({ marker, data: location });
-        });
+    locations.forEach(location => {
+      const marker = new kakao.maps.Marker({
+        map,
+        position: new kakao.maps.LatLng(location.lat, location.lng),
+        title: location.title
       });
-  }
+
+      kakao.maps.event.addListener(marker, 'click', () => {
+        showPreviewCard(location);
+      });
+
+      // ✅ 조건에 맞는 대상은 저장만
+      if (focusId && location.id === focusId) {
+        focusTarget = { location, marker };
+      }
+
+      allMarkers.push({ marker, data: location });
+    });
+
+    // ✅ 반복문이 끝난 후 실행
+    if (focusTarget) {
+      const { location, marker } = focusTarget;
+      map.setCenter(new kakao.maps.LatLng(location.lat, location.lng));
+      map.setLevel(2);
+      showPreviewCard(location);
+      marker.setAnimation(kakao.maps.Animation.BOUNCE);
+    }
+  });
+
+  }  
+
 
 
   // 4.리스트 전용
@@ -333,6 +353,16 @@ tabButtons.forEach(button => {
     button.classList.add("text-blue-600", "border-b-2", "border-blue-500");
   });
 });
+
+function goToMapWithFocus() {
+  const data = document.getElementById("info-full-card")?.dataset.locationData;
+  if (!data) return;
+
+  const location = JSON.parse(data);
+  const locationId = encodeURIComponent(location.id);
+  window.location.href = `map.html?id=${locationId}`;
+}
+
 
 
 
