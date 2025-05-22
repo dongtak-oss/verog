@@ -304,6 +304,34 @@ if (backButton) {
     currentSlide = Math.min(currentSlide + 1, total - 1);
     updateCarousel();
   });
+
+});
+
+// ✅ 탭 전환 기능
+const tabButtons = document.querySelectorAll(".tab-btn");
+const tabSections = document.querySelectorAll(".tab-section");
+
+tabButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    const targetId = button.getAttribute("data-target");
+
+    // 1. 모든 섹션 숨기기
+    tabSections.forEach(section => section.classList.add("hidden"));
+
+    // 2. 모든 버튼 스타일 초기화
+    tabButtons.forEach(btn => {
+      btn.classList.remove("text-blue-600", "border-b-2", "border-blue-500");
+      btn.classList.add("text-gray-600");
+    });
+
+    // 3. 클릭한 섹션만 보이기
+    const targetSection = document.getElementById(targetId);
+    if (targetSection) targetSection.classList.remove("hidden");
+
+    // 4. 클릭한 버튼 스타일 적용
+    button.classList.remove("text-gray-600");
+    button.classList.add("text-blue-600", "border-b-2", "border-blue-500");
+  });
 });
 
 
