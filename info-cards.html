@@ -1,0 +1,138 @@
+<!-- ✅ 절반 카드형 정보창 (preview) -->
+<div id="info-preview-card"
+  class="fixed bottom-0 left-0 w-full max-w-xl mx-auto bg-white z-[1000] p-4 rounded-t-2xl shadow-lg flex items-center gap-4 overflow-hidden hidden">
+
+
+  <!-- 이미지 (왼쪽) -->
+  <div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-gray-200">
+    <img id="preview-image" src="your_image_url.jpg" alt="썸네일" class="w-full h-full object-cover" />
+  </div>
+
+  <!-- 텍스트 (오른쪽) -->
+  <div class="flex flex-col justify-between flex-grow min-w-0">
+
+    <!-- 식당 이름 -->
+    <h3 id="preview-title" class="text-base font-bold text-gray-800 truncate">
+      성수까망
+    </h3>
+
+    <!-- 설명 -->
+    <p id="preview-description" class="text-sm text-gray-600 line-clamp-2">
+      성게알 파스타가 유명한 감성적인 식당
+    </p>
+
+    <!-- 별점 -->
+    <div class="flex gap-3 text-xs text-gray-700 pt-1">
+      <span class="flex items-center gap-1">
+        <span class="text-yellow-400">⭐</span> 상위 <strong>4.5</strong>
+      </span>
+      <span class="flex items-center gap-1">
+        <span class="text-yellow-400">⭐</span> 일반 <strong>3.8</strong>
+      </span>
+    </div>
+  </div>
+
+  <!-- 닫기 버튼 -->
+  <button id="close-preview" class="absolute top-2 right-4 text-lg text-gray-400 hover:text-gray-600">
+    ✖
+  </button>
+</div>
+
+<!-- ✅ 전체 카드형 정보창 (full) -->
+<div id="info-full-card" class="hidden">
+  <div class="info-header">
+    <button id="back-to-preview" class="back-button">← 돌아가기</button>
+    <h2 id="full-title" class="info-title">식당 이름</h2>
+  </div>
+
+  <!-- ✅ 상단 탭 -->
+<div class="tab-bar sticky top-0 z-50 bg-white border-b flex justify-around text-sm font-medium">
+  <button class="tab-btn py-3 px-4 border-b-2 border-blue-500 text-blue-600" data-target="tab-home">홈</button>
+  <button class="tab-btn py-3 px-4 text-gray-600" data-target="tab-review">리뷰</button>
+  <button class="tab-btn py-3 px-4 text-gray-600" data-target="tab-menu">메뉴</button>
+  <button class="tab-btn py-3 px-4 text-gray-600" data-target="tab-photo">사진</button>
+  <button class="tab-btn py-3 px-4 text-gray-600" onclick="goToMapWithFocus()">지도</button>
+</div>
+
+<!-- ✅ 홈 탭 콘텐츠 -->
+  <section id="tab-home" class="tab-section block px-4 py-4">
+    <div class="info-row">
+      <span class="label">설명:</span>
+      <span class="content" id="full-description"></span>
+    </div>
+    <div class="info-row">
+      <span class="label">카테고리:</span>
+      <span class="content" id="full-type">이탈리안</span>
+    </div>
+  </section>
+
+  <!-- ✅ 리뷰 탭 -->
+  <section id="tab-review" class="tab-section hidden px-4 py-6">
+    <h4 class="text-lg font-semibold mb-4">리뷰</h4>
+    <ul id="review-list" class="space-y-6">
+      <!-- ✅ 리뷰 카드 -->
+      <li class="review-card bg-white shadow-md rounded-xl p-4">
+        <div class="flex justify-between items-center mb-2 text-sm text-gray-600">
+          <span class="font-medium">익명</span>
+          <span>날짜 없음</span>
+        </div>
+        <div class="space-y-2 text-sm">
+          <div class="flex items-start gap-1">
+            <strong>🍝 맛:</strong><span>⭐</span>
+            <p class="ml-1 text-gray-700">→ 성게알 풍미가 진하고 면도 탱글탱글했어요.</p>
+          </div>
+          <div class="flex items-start gap-1">
+            <strong>💸 가성비:</strong><span>⭐½</span>
+            <p class="ml-1 text-gray-700">→ 맛은 있지만 가격은 살짝 부담됐어요.</p>
+          </div>
+          <div class="flex items-start gap-1">
+            <strong>🎵 분위기:</strong><span>⭐</span>
+            <p class="ml-1 text-gray-700">→ 조용하고 조명이 예뻐서 분위기가 좋았어요.</p>
+          </div>
+          <div class="flex items-start gap-1">
+            <strong>🧼 친절·위생:</strong><span>⭐½</span>
+            <p class="ml-1 text-gray-700">→ 서빙은 빠르지만 테이블 위 정리는 조금 아쉬웠습니다.</p>
+          </div>
+          <div class="flex items-start gap-1">
+            <strong>🌈 취향:</strong><span>⭐</span>
+            <p class="ml-1 text-gray-700">→ 제 입맛엔 딱 맞았어요.</p>
+          </div>
+        </div>
+        <div class="mt-4 p-3 bg-gray-100 rounded-md text-sm text-gray-800">
+          <strong>📝 총평</strong>
+          <p>→ 전체적으로 만족스러웠지만 가격이 살짝 아쉽네요.</p>
+        </div>
+        <div class="mt-2 text-right font-semibold text-yellow-600 text-sm">
+          ⭐ 총점: <span class="text-lg">4.0</span>
+        </div>
+      </li>
+    </ul>
+    <div class="review-actions mt-4">
+      <a id="review-button" class="write-review-btn" href="#" target="_blank">
+        ➕ 리뷰 작성하기
+      </a>
+    </div>
+  </section>
+
+   <!-- ✅ 사진 탭 -->
+  <section id="tab-photo" class="tab-section hidden px-4 py-4">
+    <div class="carousel-container relative">
+      <div class="carousel-images flex overflow-hidden w-full" id="carousel-images">
+        <!-- 예: <img src="img1.jpg" class="w-full object-cover rounded-xl" /> -->
+      </div>
+      <button id="carousel-prev" class="carousel-btn left absolute top-1/2 left-4 transform -translate-y-1/2 bg-white px-2 py-1 rounded-full shadow">←</button>
+      <button id="carousel-next" class="carousel-btn right absolute top-1/2 right-4 transform -translate-y-1/2 bg-white px-2 py-1 rounded-full shadow">→</button>
+    </div>
+  </section>
+
+
+  <!-- ✅ 메뉴 탭 -->
+  <section id="tab-menu" class="tab-section hidden px-4 py-4">
+    <p class="text-gray-600">메뉴 정보 준비 중입니다.</p>
+  </section>
+
+  <!-- ✅ 지도 탭 -->
+  <section id="tab-map" class="tab-section hidden px-4 py-4">
+    <p class="text-gray-600">지도 정보 준비 중입니다.</p>
+  </section>
+</div>
