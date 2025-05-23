@@ -44,13 +44,10 @@ document.getElementById("back-to-preview")?.addEventListener("click", () => {
   }
 });
 
-// ✅ 2-3. previewCard 닫기 버튼 (X 버튼)
+// ✅ previewCard 닫기 버튼 (X 버튼)
 document.getElementById("close-preview")?.addEventListener("click", () => {
   previewCard.classList.add("hidden");
 });
-
-
-
 
   // ✅ 2-3. 탭 전환
   document.querySelectorAll(".tab-btn").forEach(btn => {
@@ -197,6 +194,8 @@ function showFullCard(loc) {
   document.getElementById("info-full-card").dataset.locationData = JSON.stringify(loc);
   document.getElementById("info-full-card").classList.remove("hidden");
   document.getElementById("info-preview-card").classList.add("hidden");
+  // ✅ 리뷰 탭을 기본으로 표시
+  activateTab("review-tab");
 
   const reviews = reviewData[loc.id] || [];
   const container = document.getElementById("review-list");
